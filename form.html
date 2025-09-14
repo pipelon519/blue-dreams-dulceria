@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login / Registro con efecto</title>
+  <link rel="stylesheet" href="form.css">
+  <script src="script.js"></script>
+</head>
+<body>
+     <header>
+  <div class="logo-out">
+    <img src="assets/logo.png" alt="Blue Dreams logo">
+  </div>
+
+  <div class="nav-capsula">
+    <nav class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#esencia">Esencia</a>
+      <a href="products.html">Productos</a>
+      <a href="about.html">Sobre</a>
+      <a href="contact.html">Contacto</a>
+    </nav>
+    
+  </div>
+</header>
+<div class="menu-toggle">☰</div>
+ <div class="container">
+  <img src="ruta-de-tu-foto.jpg" alt="Fondo" class="background-image">
+
+  <div class="form-wrapper">
+    <!-- Formulario Login -->
+    <form id="loginForm" class="form active">
+      <div class="icon-circle">
+        <span class="icon-user"></span>
+      </div>
+      <input type="email" placeholder="Email ID" />
+      <input type="password" placeholder="Password" />
+      <div class="options">
+        <label><input type="checkbox" /> Remember me</label>
+        <a href="#" class="forgot">Forgot Password?</a>
+      </div>
+      <button type="submit">LOGIN</button>
+      <p>¿No tienes cuenta? <a href="#" id="goToRegister">Regístrate</a></p>
+    </form>
+
+    <!-- Formulario Registro -->
+    <form id="registerForm" class="form">
+      <div class="icon-circle">
+        <span class="icon-user"></span>
+      </div>
+      <input type="text" placeholder="Nombre completo" />
+      <input type="email" placeholder="Email ID" />
+      <input type="password" placeholder="Password" />
+      <button type="submit">REGISTER</button>
+      <p>¿Ya tienes cuenta? <a href="#" id="goToLogin">Iniciar sesión</a></p>
+    </form>
+  </div>
+</div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const goToRegister = document.getElementById('goToRegister');
+  const goToLogin = document.getElementById('goToLogin');
+
+  goToRegister.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Mostrar registro encima y login chiquito
+    registerForm.classList.add('active');
+    registerForm.classList.remove('shrunk');
+    loginForm.classList.add('shrunk');
+    loginForm.classList.remove('active');
+  });
+
+  goToLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Mostrar login encima y registro chiquito
+    loginForm.classList.add('active');
+    loginForm.classList.remove('shrunk');
+    registerForm.classList.add('shrunk');
+    registerForm.classList.remove('active');
+  });
+
+  // Por defecto solo login visible
+  loginForm.classList.add('active');
+  registerForm.classList.remove('active');
+});
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+  // 🔑 Usa tu configuración de Firebase aquí
+  const firebaseConfig = {
+    apiKey: "AIzaSyD64HQ1BkOmD3Dn8iOEMN4EIxfYyrmqo64",
+    authDomain: "https://9000-firebase-blue-dreams-1757803486483.cluster-mdgxqvvkkbfpqrfigfiuugu5pk.cloudworkstations.dev/",
+    projectId: "samuel-a4122",
+    storageBucket: "TU_BUCKET.appspot.com",
+    messagingSenderId: "TU_ID",
+    appId: "TU_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const form = document.getElementById("registroForm");
+  const mensaje = document.getElementById("mensaje");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Obtener datos del formulario
+    const nombre = document.getElementById("nombre").value;
+    const email = document.getElementById("email").value;
+
+    try {
+      // Guardar en Firestore
+      await addDoc(collection(db, "usuarios"), {
+        nombre: nombre,
+        email: email,
+        fecha: new Date()
+      });
+
+      mensaje.textContent = "✅ Usuario registrado con éxito!";
+      form.reset();
+    } catch (error) {
+      mensaje.textContent = "❌ Error al registrar: " + error.message;
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,14 +1,278 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blue Dreams</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <header>
+  <div class="logo-out">
+    <img src="assets/logo.png" alt="Blue Dreams logo">
+  </div>
+
+  <div class="nav-capsula">
+    <nav class="nav-links">
+      <a href="#">Inicio</a>
+      <a href="#esencia">Esencia</a>
+      <a href="products.html">Productos</a>
+      <a href="about.html">Sobre</a>
+      <a href="contact.html">Contacto</a>
+      
+    </nav>
+    <div class="header-actions">
+        <button class="btn">Entrar</button>
+        <button class="cart-btn">
+            <span role="img" aria-label="Shopping Cart">🛒</span>
+            <span class="cart-count">0</span>
+        </button>
+      </div>
+  </div>
+  <div class="menu-toggle">☰</div>
+</header>
+
+
+<div class="slider">
+  <div class="list">
+      <div class="item" >
+          <img src="assets/img1.png">
+      </div>
+      <div class="item active">
+          <img src="assets/img2.png">
+      </div>
+      <div class="item">
+          <img src="assets/img3.png">
+      </div>
+      <div class="item">
+          <img src="assets/img4.png">
+      </div>
+      <div class="item">
+          <img src="assets/img5.png">
+  </div>
+</div>
+<div class="circle">
+    BLUE DREAMS SHOP - dulceria para todos los gustos - Delicias unicas - 
+</div>
+<div class="content">
+        <div>💙✨</div>
+        <div>Bienvenidos</div>
+        <button>Ver Mas</button>
+
+    </div>
+    <div class="arow">
+        <button id="prev"><</button>
+        <button id="next">></button>
+    </div>
+</div>
+<section class="esencia" id="esencia">
+  <h2>Nuestra Esencia</h2>
+  <div class="esencia-cards">
+    <div class="dato">
+      <img src="assets/img6.jfif" alt="Innovación">
+      <h3>Innovación</h3>
+      <p>Siempre a la vanguardia en experiencias digitales.</p>
+    </div>
+    <div class="dato">
+      <img src="assets/img7.jpg" alt="Confianza">
+      <h3>Confianza</h3>
+      <p>Comprometidos con la seguridad y transparencia.</p>
+    </div>
+    <div class="dato">
+      <img src="assets/img8.jpg" alt="Estilo">
+      <h3>Estilo</h3>
+      <p>Un diseño único que marca la diferencia.</p>
+    </div>
+  </div>
+</section>
+<div class="may">
+  <div class="title4">
+  <h2>Nuestras Bebidas Destacadas</h2>
+</div><div class="slider-productos">
+        <div class="sub-slider">
+            <div class="producto">
+                <img src="assets/img10.png" alt="Caramel Latte">
+                <h3>Caramel Latte</h3>
+                <button>Add to Cart</button>
+            </div>
+            <div class="producto">
+                <img src="assets/img9.png" alt="Mocha Frappe">
+                <h3>Strawberry Frappe</h3>
+                <button>Add to Cart</button>
+            </div>
+            <div class="producto">
+                <img src="assets/img11.png" alt="Vanilla Bean">
+                <h3>Vanilla Bean</h3>
+                <button>Add to Cart</button>
+            </div>
+            <div class="producto">
+                <img src="assets/img12.png" alt="Hazelnut Brew">
+                <h3>Hazelnut Brew</h3>
+                <button>Add to Cart</button>
+            </div>
+            <div class="producto">
+                <img src="assets/img13.png" alt="Hazelnut Brew">
+                <h3>Hazelnut Brew</h3>
+                <button>Add to Cart</button>
+            </div>
+                        <div class="producto">
+                <img src="assets/img10.png" alt="Caramel Latte">
+                <h3>Caramel Latte</h3>
+                <button>Add to Cart</button>
+            </div>
+            <div class="producto">
+                <img src="assets/img9.png" alt="Mocha Frappe">
+                <h3>Strawberry Frappe</h3>
+                <button>Add to Cart</button>
+            </div>
+            
+            </div>
+        </div>
+        <div class="controls">
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+</div>
+</div>
+
+</div>
+
+ 
+
+
+<div class="esencia2">
+  <h2>Nuestra Esencia Cafetera</h2>
+  <div class="contenedor-esencia">
+    
+    <div class="item" data-num="01">
+      <h3>Calidad Suprema Y Unica</h3>
+      <p>Seleccionamos granos de la mejor calidad para garantizar un sabor inigualable.</p>
+    </div>
+
+    <div class="item" data-num="02">
+      <h3>Origen Selecto y Sostenible</h3>
+      <p>Cada grano es elegido de las fincas colombianas cultivado con respeto por la tierra y sus comunidades.</p>
+    </div>
+
+    <div class="centro">
+      <img src="assets/img14.png" alt="Vaso de café">
+      <button>Pide ahora</button>
+    </div>
+
+    <div class="item" data-num="03">
+      <h3>Tostado Artesanal</h3>
+      <p>Este proceso manual garantiza una taza fresca y equilibrada, donde la tradición se une con la pasión cafetera.<p>
+    </div>
+
+    <div class="item" data-num="04">
+      <h3>Equipo Profesional con Tradición y Cultura</h3>
+      <p>Baristas expertos que rescatan la historia del café colombiano para que un sorbo cuente un legado.</p>
+    </div>
+
+  </div>
+</div>
+
+
+<section class="cta" id="cta">
+    <h2>¿Listo para comenzar?</h2>
+    <button class="btn"><a href="form.html">Crear Cuenta</a></button>
+  </section>
+  <footer class="footer-container">
+    <!-- Banner con texto en movimiento -->
+    <div class="footer-banner" aria-hidden="true">
+        <div class="footer-banner-text">
+            <span>BLUE DREAMS</span>
+            <span style="margin: 0 20px;">•</span>
+            <span>BLUE DREAMS</span>
+            <span style="margin: 0 20px;">•</span>
+            <span>BLUE DREAMS</span>
+            <span style="margin: 0 20px;">•</span>
+            <span>BLUE DREAMS</span>
+            <span style="margin: 0 20px;">•</span>
+            <span>BLUE DREAMS</span>
+            <span style="margin: 0 20px;">•</span>
+             <span>BLUE DREAMS</span>
+            <span style="margin: 0 20px;">•</span>
+            <span>BLUE DREAMS</span>
+            <span style="margin: 0 20px;">•</span>
+             <span>BLUE DREAMS</span>
+            <span style="margin: 0 20px;">•</span>
+            <span>BLUE DREAMS</span>
+            <span style="margin: 0 20px;">•</span>
+        </div>
+    </div>
+
+    <div class="footer-content">
+        <!-- Fila de arriba: Contacto y Agradecimiento -->
+        <div class="footer-top-row">
+            <!-- Tarjeta de Contacto -->
+            <div class="footer-card footer-contact-card">
+                <h3>CONTACTO</h3>
+                <form action="#">
+                    <input type="text" placeholder="Nombre" aria-label="Nombre">
+                    <input type="email" placeholder="Correo Electrónico" aria-label="Correo Electrónico">
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+            <!-- Tarjeta de Agradecimiento -->
+            <div class="footer-card footer-thankyou-card">
+                <h3>¡GRACIAS!</h3>
+                <p>Gracias por visitar nuestro sitio y ser parte de este sueño azul.</p>
+                <a href="#" class="arrow-button" aria-label="Explorar más">→</a>
+            </div>
+        </div>
+
+        <!-- Fila de abajo: Logo, Info y Suscripción -->
+        <div class="footer-bottom-row">
+            <!-- Logo e info -->
+            <div class="footer-logo-area">
+                <img src="assets/Flogo.png" alt="Logo de Blue Dreams">
+                <p>Nos dedicamos a crear experiencias únicas con un diseño elegante y funcional. Hecho con pasión.</p>
+            </div>
+            <!-- Suscripción -->
+            <div class="footer-subscribe-area">
+                <h3>SUSCRÍBETE</h3>
+                <form action="#">
+                    <input type="email" placeholder="Tu correo electrónico" aria-label="Correo electrónico para suscribirse">
+                    <button type="submit" aria-label="Suscribirse">→</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="cart-sidebar" class="cart-sidebar">
+    <div class="cart-header">
+        <h3>Mi Carrito</h3>
+        <button class="close-cart-btn">&times;</button>
+    </div>
+    <div class="cart-items">
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">Total: $0.00</div>
+        <button class="checkout-btn">Finalizar Compra</button>
+    </div>
+</div>
+<div id="cart-overlay" class="cart-overlay"></div>
+
+  <script src="main.js"></script>
+ 
+<div id="esencia-modal-overlay" class="esencia-modal-overlay">
+  <div class="esencia-modal-post">
+    <div class="esencia-modal-image">
+      <img src="assets/img14.png" alt="Imagen de Esencia">
+    </div>
+    <div class="esencia-modal-info">
+      <h3 class="esencia-modal-title">Título de la Esencia</h3>
+      <div class="esencia-modal-body">
+        <!-- El contenido detallado se insertará aquí con JavaScript -->
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
+

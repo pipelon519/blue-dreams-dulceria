@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Blue Dreams</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="productos.css">
+</head>
+<body class="light-theme">
+
+    <!-- HEADER (Sin cambios, ya está bien) -->
+    <header class="site-header">
+        <div class="header-content">
+          <div class="logo-container">
+            <a href="index.html"><img src="assets/Flogo.png" alt="Blue Dreams Logo"></a>
+            <span class="logo-text">Blue Dreams</span>
+          </div>
+          <nav class="main-nav">
+              <a href="index.html">Inicio</a>
+              <a href="products.html" class="active">Productos</a>
+              <a href="about.html">Sobre Nosotros</a>
+          </nav>
+          <div class="header-right">
+            <div class="header-search-bar">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder="Buscar...">
+            </div>
+            <button class="cart-btn">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span class="cart-count">0</span>
+            </button>
+          </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL (Sin cambios, ya está bien) -->
+    <main class="page-content">
+        <section class="hero-section">
+            <div class="hero-left">
+                <h1>Bebidas que <br>Inspiran Calma</h1>
+                <p>Una versión ligera de los clásicos. El café y los sabores frutales se unen en perfecta armonía para darle un toque refrescante a tu día.</p>
+                <div class="hero-buy">
+                    <span class="price">$5.50</span>
+                    <button class="buy-now-btn" data-product-id="hero-01" data-product-name="Latte Especial" data-product-price="5.50" data-product-image="assets/img14.png">
+                        Comprar Ahora <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-center">
+                <div class="hero-image-container">
+                    <div class="background-circle"></div>
+                    <img src="assets/img-bean-1.png" alt="Grano de café" class="floating-bean bean-1">
+                    <img src="assets/img14.png" alt="Bebida destacada" class="hero-drink-img">
+                    <img src="assets/img-bean-2.png" alt="Grano de café" class="floating-bean bean-2">
+                    <div class="holiday-card">
+                        <h4>Guía de Regalos</h4>
+                        <p>El detalle perfecto para los amantes del café.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-right-features">
+                <div class="feature-item">
+                    <img src="assets/icon-sugar-free.png" alt="Icono sin azúcar">
+                    <div><h5>Sin Azúcar</h5><p>Endulzado naturalmente.</p></div>
+                </div>
+                <div class="feature-item">
+                    <img src="assets/icon-premium.png" alt="Icono calidad premium">
+                    <div><h5>100% Premium</h5><p>Granos de Arábica seleccionados.</p></div>
+                </div>
+                <div class="feature-item">
+                    <img src="assets/icon-chilled.png" alt="Icono bebidas frías">
+                    <div><h5>Clásicos Fríos</h5><p>Descubre nuestra línea de verano.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-slider-section">
+            <div class="slider-wrapper">
+                <div class="slider-track">
+                    <div class="slide-card" data-product-id="slider-01" data-product-name="Frappe de Fresa" data-product-price="6.50" data-product-image="assets/img9.png">
+                        <div class="slide-img-background" style="--bg-color: #fbdde6;"><img src="assets/img9.png" alt="Frappe de Fresa"></div>
+                        <h4>Frappe de Fresa</h4><a href="#" class="add-to-order">Añadir a la orden +</a>
+                    </div>
+                    <div class="slide-card" data-product-id="slider-02" data-product-name="Latte de Caramelo" data-product-price="5.75" data-product-image="assets/img10.png">
+                        <div class="slide-img-background" style="--bg-color: #d3e5d3;"><img src="assets/img10.png" alt="Latte de Caramelo"></div>
+                        <h4>Latte de Caramelo</h4><a href="#" class="add-to-order">Añadir a la orden +</a>
+                    </div>
+                    <div class="slide-card" data-product-id="slider-03" data-product-name="Vainilla Bean" data-product-price="5.50" data-product-image="assets/img11.png">
+                        <div class="slide-img-background" style="--bg-color: #fdf2d0;"><img src="assets/img11.png" alt="Vainilla Bean"></div>
+                        <h4>Vainilla Bean</h4><a href="#" class="add-to-order">Añadir a la orden +</a>
+                    </div>
+                    <div class="slide-card" data-product-id="slider-04" data-product-name="Café de Avellana" data-product-price="5.25" data-product-image="assets/img12.png">
+                        <div class="slide-img-background" style="--bg-color: #e3d9d0;"><img src="assets/img12.png" alt="Café de Avellana"></div>
+                        <h4>Café de Avellana</h4><a href="#" class="add-to-order">Añadir a la orden +</a>
+                    </div>
+                    <div class="slide-card" data-product-id="slider-05" data-product-name="Frappe de Mocha" data-product-price="6.25" data-product-image="assets/img13.png">
+                        <div class="slide-img-background" style="--bg-color: #e9e0da;"><img src="assets/img13.png" alt="Frappe de Mocha"></div>
+                        <h4>Frappe de Mocha</h4><a href="#" class="add-to-order">Añadir a la orden +</a>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-arrow prev"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-arrow next"><i class="fa-solid fa-chevron-right"></i></button>
+        </section>
+    </main>
+
+    <!-- ======== CARRITO (CORREGIDO) Y OVERLAY ======== -->
+    <aside id="cart-sidebar" class="order-summary">
+        <div class="summary-header">
+            <h3>Tu Pedido</h3>
+            <button class="close-cart-btn">&times;</button>
+        </div>
+        
+        <!-- ESTE ES EL CONTENEDOR QUE FALTABA -->
+        <div class="cart-items">
+            <!-- Los productos del carrito se insertarán aquí -->
+        </div>
+        
+        <div class="summary-footer">
+            <div class="total-cost">
+                <span>Total</span>
+                <span class="cart-total-price">$0.00</span>
+            </div>
+            <button class="checkout-btn">Finalizar Compra <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </aside>
+    <div id="cart-overlay" class="cart-overlay"></div>
+
+    <!-- Scripts (Sin cambios, ya están bien) -->
+    <script src="cart.js"></script>
+    <script src="productos.js"></script>
+</body>
+</html>
+
