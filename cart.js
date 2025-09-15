@@ -1,112 +1,155 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- SELECTORES (Sin cambios) ---
+    // Selectors
     const cartSidebar = document.getElementById('cart-sidebar');
     const cartOverlay = document.getElementById('cart-overlay');
     const cartItemsContainer = document.querySelector('.cart-items');
-    const cartTotalPriceElement = document.querySelector('.cart-total-price');
     const cartCountElements = document.querySelectorAll('.cart-count');
+    
+    // New selectors from the updated design
+    const itemsTotalPriceElement = document.querySelector('.items-total-price');
+    const discountsPriceElement = document.querySelector('.discounts-price');
+    const finalTotalPriceElement = document.querySelector('.cart-total-price');
 
-    // Carga el carrito desde localStorage
+    // Load cart from localStorage
     let cart = JSON.parse(localStorage.getItem('blueDreamsCart')) || [];
 
-    // --- LÓGICA DE VISIBILIDAD DEL CARRITO (Sin cambios) ---
+    // --- Cart UI Functions ---
     const openCart = () => {
         if (cartSidebar) cartSidebar.classList.add('active');
         if (cartOverlay) cartOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
     };
 
     const closeCart = () => {
         if (cartSidebar) cartSidebar.classList.remove('active');
         if (cartOverlay) cartOverlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore background scroll
     };
 
-    // Asignar eventos a los botones de abrir/cerrar
+    // Event Listeners for opening/closing cart
     document.querySelectorAll('.cart-btn').forEach(btn => btn.addEventListener('click', openCart));
     document.querySelectorAll('.close-cart-btn').forEach(btn => btn.addEventListener('click', closeCart));
     if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
-    // --- FUNCIONES DE GUARDADO Y LÓGICA DEL CARRITO ---
+    // --- Cart Data Functions ---
     const saveCart = () => {
         localStorage.setItem('blueDreamsCart', JSON.stringify(cart));
-        console.log('LocalStorage actualizado:', localStorage.getItem('blueDreamsCart'));
     };
-    
-    // --- ¡AQUÍ ESTÁ LA MAGIA! - FUNCIONES DE RENDERIZADO REFORZADAS ---
 
-    // 1. Función para actualizar los totales (ícono y suma)
     const updateCartTotals = () => {
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const discounts = 0; // Placeholder for future discount logic
+        const finalTotal = subtotal - discounts;
 
-        console.log(`Actualizando totales: ${totalItems} items, $${totalPrice.toFixed(2)}`);
-
+        // Update cart icon count
         cartCountElements.forEach(el => {
             el.textContent = totalItems;
         });
         
-        if (cartTotalPriceElement) {
-            cartTotalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
-        }
+        // Update summary footer
+        if (itemsTotalPriceElement) itemsTotalPriceElement.textContent = `$${subtotal.toFixed(2)}`;
+        if (discountsPriceElement) discountsPriceElement.textContent = `-$${discounts.toFixed(2)}`;
+        if (finalTotalPriceElement) finalTotalPriceElement.textContent = `$${finalTotal.toFixed(2)}`;
     };
 
-    // 2. Función para renderizar los productos dentro del carrito
     const renderCartItems = () => {
         if (!cartItemsContainer) {
-            console.error("Error fatal: Contenedor '.cart-items' no encontrado.");
+            console.error("Fatal Error: '.cart-items' container not found.");
             return;
         }
 
         if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p style="text-align:center; color:#6b7280; padding: 20px;">Tu pedido está vacío.</p>';
+            cartItemsContainer.innerHTML = '<p style="text-align:center; color: var(--text-secondary); padding: 40px 20px;">Your cart is empty.</p>';
         } else {
-            // Construimos todo el HTML de una vez para evitar errores de renderizado
             const allItemsHTML = cart.map(item => `
                 <div class="cart-item" data-id="${item.id}">
-                    <img src="${item.image}" alt="${item.name}" class="cart-item-img">
-                    <div class="cart-item-info">
-                        <p class="cart-item-name">${item.name}</p>
-                        <p class="cart-item-quantity-text">x ${item.quantity}</p>
+                    <div class="cart-item-img-container">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
                     </div>
-                    <p class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</p>
-                    <button class="remove-item-btn">&times;</button>
+                    <div class="cart-item-info">
+                        <h5>${item.name}</h5>
+                        <p>Small - 200g</p>
+                        <div class="cart-item-details">
+                            <span class="cart-item-price">$${parseFloat(item.price).toFixed(2)}</span>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn decrease-btn" data-id="${item.id}">-</button>
+                                <span class="item-quantity-display">${item.quantity}</span>
+                                <button class="quantity-btn increase-btn" data-id="${item.id}">+</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             `).join('');
-            
             cartItemsContainer.innerHTML = allItemsHTML;
         }
     };
     
-    // 3. Función principal que une el renderizado
     const fullRender = () => {
-        console.log("Iniciando renderizado completo del carrito...");
         renderCartItems();
         updateCartTotals();
-        console.log("Renderizado completo.");
     }
 
-    // --- FUNCIONES GLOBALES Y MANEJO DE EVENTOS ---
+    // --- Cart Logic Functions ---
+    const increaseQuantity = (productId) => {
+        const item = cart.find(i => i.id === productId);
+        if (item) {
+            item.quantity++;
+        }
+        saveCart();
+        fullRender();
+    };
+
+    const decreaseQuantity = (productId) => {
+        const item = cart.find(i => i.id === productId);
+        if (item) {
+            item.quantity--;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+        }
+        saveCart();
+        fullRender();
+    };
+
+    // This function is no longer called from the UI but can be kept for other uses
+    const removeItem = (productId) => {
+        cart = cart.filter(item => item.id !== productId);
+        saveCart();
+        fullRender();
+    };
+
+    // --- Global addToCart function ---
     window.addToCart = (product) => {
         const existingItem = cart.find(item => item.id === product.id);
         if (existingItem) {
             existingItem.quantity++;
         } else {
-            cart.push({ ...product, quantity: 1 });
+            // Ensure price is a number before adding
+            const price = parseFloat(product.price);
+            if (isNaN(price)) {
+                console.error("Product being added has an invalid price:", product);
+                return;
+            }
+            cart.push({ ...product, price: price, quantity: 1 });
         }
         
-        saveCart();   // Guarda los datos
-        fullRender(); // Actualiza la pantalla
-        openCart();   // <-- ¡NUEVO! Abre el carrito para mostrar el producto añadido.
+        saveCart();
+        fullRender();
+        openCart();
     };
 
+    // --- Event Delegation for Cart Actions ---
     const handleCartClick = (e) => {
-        if (e.target.classList.contains('remove-item-btn')) {
-            const itemElement = e.target.closest('.cart-item');
-            const productId = itemElement.dataset.id;
-            
-            cart = cart.filter(item => item.id !== productId);
-            
-            saveCart();
-            fullRender();
+        const target = e.target;
+        const productId = target.dataset.id;
+
+        if (!productId) return;
+
+        if (target.classList.contains('increase-btn')) {
+            increaseQuantity(productId);
+        } else if (target.classList.contains('decrease-btn')) {
+            decreaseQuantity(productId);
         }
     };
 
@@ -114,8 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cartItemsContainer.addEventListener('click', handleCartClick);
     }
     
-    // --- INICIALIZACIÓN ---
-    // Dibuja el estado inicial del carrito apenas carga la página.
+    // Initial render on page load
     fullRender();
 });
-

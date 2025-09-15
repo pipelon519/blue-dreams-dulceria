@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="productos.css">
 </head>
-<body class="light-theme">
+<body>
 
     <header>
         <div class="logo-out">
-            <a href="index.html"><img src="assets/logo.png" alt="Blue Dreams logo"></a>
+            <a href="index.html">
+                <img src="assets/logo.png" alt="Blue Dreams logo">
+            </a>
         </div>
         <div class="nav-capsula">
             <nav class="nav-links">
@@ -25,7 +27,7 @@
             </nav>
             <div class="header-actions">
                 <button class="cart-btn">
-                    <i class="fa-solid fa-bag-shopping"></i>
+                    <i class="fa-solid fa-shopping-bag"></i>
                     <span class="cart-count">0</span>
                 </button>
             </div>
@@ -156,16 +158,34 @@
 
     <aside id="cart-sidebar" class="order-summary">
         <div class="summary-header">
-            <h3>Tu Pedido</h3>
+            <div class="summary-header-top">
+                <h3>Cart</h3>
+                <span class="order-number">Order #3243</span>
+            </div>
+            <div class="order-options">
+                <button class="option-btn active">Delivery</button>
+                <button class="option-btn">Dine in</button>
+                <button class="option-btn">Take away</button>
+            </div>
             <button class="close-cart-btn">&times;</button>
         </div>
-        <div class="cart-items"></div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
         <div class="summary-footer">
+            <div class="summary-line">
+                <span>Items</span>
+                <span class="items-total-price">$0.00</span>
+            </div>
+            <div class="summary-line">
+                <span>Discounts</span>
+                <span class="discounts-price">-$0.00</span>
+            </div>
             <div class="total-cost">
                 <span>Total</span>
                 <span class="cart-total-price">$0.00</span>
             </div>
-            <button class="checkout-btn">Finalizar Compra <i class="fa-solid fa-arrow-right"></i></button>
+            <button class="checkout-btn">Place an order</button>
         </div>
     </aside>
     <div id="cart-overlay" class="cart-overlay"></div>
