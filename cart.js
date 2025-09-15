@@ -1,162 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Selectors
-    const cartSidebar = document.getElementById('cart-sidebar');
     const cartOverlay = document.getElementById('cart-overlay');
-    const cartItemsContainer = document.querySelector('.cart-items');
-    const cartCountElements = document.querySelectorAll('.cart-count');
-    
-    // New selectors from the updated design
-    const itemsTotalPriceElement = document.querySelector('.items-total-price');
-    const discountsPriceElement = document.querySelector('.discounts-price');
-    const finalTotalPriceElement = document.querySelector('.cart-total-price');
+    const cart = document.getElementById('cart');
+    const closeCartBtn = document.getElementById('close-cart-btn');
+    const cartBtn = document.querySelector('.cart-btn');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const cartCount = document.querySelector('.cart-count');
 
-    // Load cart from localStorage
-    let cart = JSON.parse(localStorage.getItem('blueDreamsCart')) || [];
+    let items = [];
 
-    // --- Cart UI Functions ---
     const openCart = () => {
-        if (cartSidebar) cartSidebar.classList.add('active');
-        if (cartOverlay) cartOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
+        cartOverlay.classList.add('active');
     };
 
     const closeCart = () => {
-        if (cartSidebar) cartSidebar.classList.remove('active');
-        if (cartOverlay) cartOverlay.classList.remove('active');
-        document.body.style.overflow = ''; // Restore background scroll
+        cartOverlay.classList.remove('active');
     };
 
-    // Event Listeners for opening/closing cart
-    document.querySelectorAll('.cart-btn').forEach(btn => btn.addEventListener('click', openCart));
-    document.querySelectorAll('.close-cart-btn').forEach(btn => btn.addEventListener('click', closeCart));
-    if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
+    const updateCart = () => {
+        cartItems.innerHTML = '';
+        let total = 0;
+        let count = 0;
 
-    // --- Cart Data Functions ---
-    const saveCart = () => {
-        localStorage.setItem('blueDreamsCart', JSON.stringify(cart));
-    };
+        items.forEach(item => {
+            total += item.price * item.quantity;
+            count += item.quantity;
 
-    const updateCartTotals = () => {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const discounts = 0; // Placeholder for future discount logic
-        const finalTotal = subtotal - discounts;
-
-        // Update cart icon count
-        cartCountElements.forEach(el => {
-            el.textContent = totalItems;
-        });
-        
-        // Update summary footer
-        if (itemsTotalPriceElement) itemsTotalPriceElement.textContent = `$${subtotal.toFixed(2)}`;
-        if (discountsPriceElement) discountsPriceElement.textContent = `-$${discounts.toFixed(2)}`;
-        if (finalTotalPriceElement) finalTotalPriceElement.textContent = `$${finalTotal.toFixed(2)}`;
-    };
-
-    const renderCartItems = () => {
-        if (!cartItemsContainer) {
-            console.error("Fatal Error: '.cart-items' container not found.");
-            return;
-        }
-
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p style="text-align:center; color: var(--text-secondary); padding: 40px 20px;">Your cart is empty.</p>';
-        } else {
-            const allItemsHTML = cart.map(item => `
-                <div class="cart-item" data-id="${item.id}">
-                    <div class="cart-item-img-container">
-                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
-                    </div>
-                    <div class="cart-item-info">
-                        <h5>${item.name}</h5>
-                        <p>Small - 200g</p>
-                        <div class="cart-item-details">
-                            <span class="cart-item-price">$${parseFloat(item.price).toFixed(2)}</span>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn decrease-btn" data-id="${item.id}">-</button>
-                                <span class="item-quantity-display">${item.quantity}</span>
-                                <button class="quantity-btn increase-btn" data-id="${item.id}">+</button>
-                            </div>
-                        </div>
-                    </div>
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <p>${formatCOP(item.price)}</p>
                 </div>
-            `).join('');
-            cartItemsContainer.innerHTML = allItemsHTML;
-        }
-    };
-    
-    const fullRender = () => {
-        renderCartItems();
-        updateCartTotals();
-    }
+                <div class="cart-item-quantity">
+                    <button class="quantity-btn minus-btn" data-id="${item.id}">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="quantity-btn plus-btn" data-id="${item.id}">+</button>
+                </div>
+                <button class="remove-btn" data-id="${item.id}">&times;</button>
+            `;
+            cartItems.appendChild(cartItem);
+        });
 
-    // --- Cart Logic Functions ---
-    const increaseQuantity = (productId) => {
-        const item = cart.find(i => i.id === productId);
-        if (item) {
-            item.quantity++;
-        }
-        saveCart();
-        fullRender();
+        cartTotal.textContent = formatCOP(total);
+        cartCount.textContent = count;
     };
 
-    const decreaseQuantity = (productId) => {
-        const item = cart.find(i => i.id === productId);
-        if (item) {
-            item.quantity--;
-            if (item.quantity <= 0) {
-                cart = cart.filter(i => i.id !== productId);
-            }
-        }
-        saveCart();
-        fullRender();
-    };
+    const addToCart = (product) => {
+        const existingItem = items.find(item => item.id === product.id);
 
-    // This function is no longer called from the UI but can be kept for other uses
-    const removeItem = (productId) => {
-        cart = cart.filter(item => item.id !== productId);
-        saveCart();
-        fullRender();
-    };
-
-    // --- Global addToCart function ---
-    window.addToCart = (product) => {
-        const existingItem = cart.find(item => item.id === product.id);
         if (existingItem) {
             existingItem.quantity++;
         } else {
-            // Ensure price is a number before adding
-            const price = parseFloat(product.price);
-            if (isNaN(price)) {
-                console.error("Product being added has an invalid price:", product);
-                return;
+            items.push({ ...product, quantity: 1 });
+        }
+
+        updateCart();
+        openCart(); // Open cart when item is added
+    };
+
+    cartItems.addEventListener('click', (e) => {
+        const id = e.target.dataset.id;
+
+        if (e.target.classList.contains('plus-btn')) {
+            const item = items.find(item => item.id === id);
+            if (item) item.quantity++;
+        } else if (e.target.classList.contains('minus-btn')) {
+            const item = items.find(item => item.id === id);
+            if (item && item.quantity > 1) {
+                item.quantity--;
+            } else {
+                items = items.filter(item => item.id !== id);
             }
-            cart.push({ ...product, price: price, quantity: 1 });
+        } else if (e.target.classList.contains('remove-btn')) {
+            items = items.filter(item => item.id !== id);
         }
-        
-        saveCart();
-        fullRender();
-        openCart();
-    };
 
-    // --- Event Delegation for Cart Actions ---
-    const handleCartClick = (e) => {
-        const target = e.target;
-        const productId = target.dataset.id;
+        updateCart();
+    });
 
-        if (!productId) return;
-
-        if (target.classList.contains('increase-btn')) {
-            increaseQuantity(productId);
-        } else if (target.classList.contains('decrease-btn')) {
-            decreaseQuantity(productId);
+    cartBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', (e) => {
+        if (e.target === cartOverlay) {
+            closeCart();
         }
-    };
+    });
 
-    if (cartItemsContainer) {
-        cartItemsContainer.addEventListener('click', handleCartClick);
-    }
-    
-    // Initial render on page load
-    fullRender();
+    window.addToCart = addToCart; 
 });

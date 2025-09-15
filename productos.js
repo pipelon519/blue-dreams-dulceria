@@ -1,83 +1,227 @@
+const formatCOP = (amount) => {
+    return new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(amount);
+};
+
+const products = [
+    {
+        id: 'cf-01',
+        name: 'Caramel Frappuccino',
+        price: 13500,
+        image: 'assets/frapuccino.png',
+        category: 'cafe-helado',
+        description: 'Café con sirope de caramelo, leche y crema batida.',
+        tag: 'new'
+    },
+    {
+        id: 'cf-02',
+        name: 'Chocolate Frappuccino',
+        price: 13500,
+        image: 'assets/mocha-frapuccino.png',
+        category: 'cafe-helado',
+        description: 'Dulce chocolate con café, leche y crema batida.',
+        tag: 'hot'
+    },
+    {
+        id: 'cf-03',
+        name: 'Matcha Latte Helado',
+        price: 14000,
+        image: 'assets/matcha-latte.png',
+        category: 'cafe-helado',
+        description: 'Té verde matcha de alta calidad con leche y un toque dulce, servido frío.'
+    },
+    {
+        id: 'cf-04',
+        name: 'Frapuccino de Vainilla',
+        price: 13000,
+        image: 'assets/vanilla-frappe.png',
+        category: 'cafe-helado',
+        description: 'Una cremosa mezcla de vainilla, café y leche, cubierta con crema.'
+    },
+
+    // --- CATEGORÍA: CAFÉ CALIENTE ---
+    {
+        id: 'cc-01',
+        name: 'Café Latte',
+        price: 9500,
+        image: 'assets/img13.png',
+        category: 'cafe-caliente',
+        description: 'Café espresso con leche vaporizada y una fina capa de espuma.'
+    },
+    {
+        id: 'cc-02',
+        name: 'Americano',
+        price: 7000,
+        image: 'assets/americano.png',
+        category: 'cafe-caliente',
+        description: 'Espresso intenso diluido con agua caliente, de sabor puro y fuerte.'
+    },
+    {
+        id: 'cc-03',
+        name: 'Capuccino',
+        price: 10500,
+        image: 'assets/capuccino.png',
+        category: 'cafe-caliente',
+        description: 'La perfecta armonía entre espresso, leche vaporizada y abundante espuma.'
+    },
+    {
+        id: 'cc-04',
+        name: 'Chocolate Caliente',
+        price: 9000,
+        image: 'assets/hot-chocolate.png',
+        category: 'cafe-caliente',
+        description: 'Chocolate de origen derretido en leche cremosa, un abrazo en una taza.'
+    },
+
+    // --- CATEGORÍA: POSTRES ---
+    {
+        id: 'p-01',
+        name: 'Torta de Limón',
+        price: 9500,
+        image: 'assets/torta-limon.png',
+        category: 'postres',
+        description: 'Suave y esponjosa torta con un glaseado de limón.'
+    },
+    {
+        id: 'p-02',
+        name: 'Brownie con Helado',
+        price: 11500,
+        image: 'assets/brownie.png',
+        category: 'postres',
+        description: 'Brownie de chocolate tibio con una bola de helado de vainilla.'
+    },
+    {
+        id: 'p-03',
+        name: 'Cheesecake Frutos Rojos',
+        price: 12000,
+        image: 'assets/cheesecake.png',
+        category: 'postres',
+        description: 'Cremoso cheesecake sobre una base de galleta, cubierto con mermelada de frutos rojos.'
+    },
+    {
+        id: 'p-04',
+        name: 'Galleta Choco Chips',
+        price: 6000,
+        image: 'assets/cookie.png',
+        category: 'postres',
+        description: 'Galleta gigante recién horneada con trozos de chocolate derretido.'
+    },
+
+    // --- CATEGORÍA: GRANOS ---
+    {
+        id: 'g-01',
+        name: 'Grano Origen Sierra Nevada',
+        price: 45000,
+        image: 'assets/grano-sierra.png',
+        category: 'granos',
+        description: 'Café de altura con notas cítricas y un cuerpo balanceado. Bolsa de 250g.'
+    },
+    {
+        id: 'g-02',
+        name: 'Grano Blend de la Casa',
+        price: 38000,
+        image: 'assets/grano-blend.png',
+        category: 'granos',
+        description: 'Nuestra mezcla secreta. Intenso, con notas a chocolate y frutos secos. Bolsa de 250g.'
+    },
+    {
+        id: 'g-03',
+        name: 'Grano Orgánico Huila',
+        price: 55000,
+        image: 'assets/grano-huila.png',
+        category: 'granos',
+        description: 'Cultivado sin pesticidas, este café ofrece un sabor puro y notas afrutadas. Bolsa de 250g.'
+    },
+    {
+        id: 'g-04',
+        name: 'Grano Descafeinado',
+        price: 42000,
+        image: 'assets/grano-descafeinado.png',
+        category: 'granos',
+        description: 'Todo el sabor del café, sin la cafeína. Proceso de lavado natural. Bolsa de 250g.'
+    }
+];
+
 document.addEventListener('DOMContentLoaded', () => {
-    // --- LÓGICA DEL SLIDER (Esta parte visual ya funcionaba bien) ---
-    const track = document.querySelector('.slider-track');
-    if (track) {
-        const slides = Array.from(track.children);
-        const nextButton = document.querySelector('.slider-arrow.next');
-        const prevButton = document.querySelector('.slider-arrow.prev');
-        
-        if (slides.length > 0) {
-            const slideWidth = slides[0].offsetWidth;
-            const gap = 40;
-            let currentIndex = 0;
+    const productGrid = document.querySelector('.product-grid');
+    const filterButtonsContainer = document.querySelector('.filter-buttons-container');
 
-            const updateSliderPosition = () => {
-                const amountToMove = currentIndex * (slideWidth + gap);
-                track.style.transform = `translateX(-${amountToMove}px)`;
-                prevButton.style.display = currentIndex === 0 ? 'none' : 'block';
+    const displayProducts = (filteredProducts) => {
+        const productsToDisplay = filteredProducts || products;
 
-                const containerWidth = track.parentElement.offsetWidth;
-                const totalWidth = track.scrollWidth;
-                
-                if (amountToMove + containerWidth >= totalWidth) {
-                    nextButton.style.display = 'none';
+        if (!productGrid) return;
+
+        productGrid.innerHTML = productsToDisplay.map(product => {
+            const tagHtml = product.tag ? `<div class="product-tag ${product.tag}">${product.tag.toUpperCase()}</div>` : '';
+
+            return `
+            <div class="product-card" data-product-id="${product.id}" data-product-name="${product.name}" data-product-price="${product.price}" data-product-image="${product.image}">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                    ${tagHtml}
+                </div>
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <span class="product-price">${formatCOP(product.price)}</span>
+                </div>
+                <button class="add-to-cart-btn">Add to cart</button>
+            </div>
+            `;
+        }).join('');
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const card = e.target.closest('.product-card');
+                const product = {
+                    id: card.dataset.productId,
+                    name: card.dataset.productName,
+                    price: parseFloat(card.dataset.productPrice),
+                    img: card.dataset.productImage,
+                };
+
+                if (window.addToCart) {
+                    window.addToCart(product);
+                }
+            });
+        });
+    };
+
+    const displayFilterButtons = () => {
+        const categories = ['all', ...new Set(products.map(p => p.category))];
+
+        if (!filterButtonsContainer) return;
+
+        filterButtonsContainer.innerHTML = categories.map(category => {
+            const categoryName = category.replace(/-/g, ' ');
+            return `<button class="filter-btn" data-category="${category}">${categoryName}</button>`;
+        }).join('');
+
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const category = e.target.dataset.category;
+
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+
+                if (category === 'all') {
+                    displayProducts(products);
                 } else {
-                    nextButton.style.display = 'block';
-                }
-            };
-
-            nextButton.addEventListener('click', () => {
-                currentIndex++;
-                updateSliderPosition();
-            });
-
-            prevButton.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateSliderPosition();
+                    const filteredProducts = products.filter(p => p.category === category);
+                    displayProducts(filteredProducts);
                 }
             });
-            updateSliderPosition();
+        });
+
+        if (filterButtons.length > 0) {
+            filterButtons[0].classList.add('active');
         }
-    }
+    };
 
-    // --- LÓGICA PARA AÑADIR AL CARRITO (VERSIÓN DEFINITIVA) ---
-    
-    // Función que se encarga de todo el proceso de añadir al carrito
-    function handleAddToCart(event) {
-        // ¡IMPORTANTE! Prevenimos la acción por defecto del enlace para evitar que la página salte.
-        event.preventDefault();
-
-        // Buscamos el contenedor padre más cercano que tiene la información del producto.
-        const productElement = event.currentTarget.closest('[data-product-id]');
-
-        if (!productElement) {
-            console.error('No se encontraron los datos del producto.');
-            return;
-        }
-
-        const productData = {
-            id: productElement.dataset.productId,
-            name: productElement.dataset.productName,
-            price: parseFloat(productElement.dataset.productPrice),
-            image: productElement.dataset.productImage
-        };
-        
-        // Llamamos a la función global del carrito que está en cart.js
-        if (window.addToCart) {
-            window.addToCart(productData);
-        } else {
-            console.error("Error: La función addToCart del carrito no está disponible.");
-        }
-    }
-
-    // Seleccionamos TODOS los elementos que pueden añadir algo al carrito
-    const addToCartTriggers = document.querySelectorAll('.buy-now-btn, .add-to-order');
-
-    // Asignamos un listener a CADA uno de ellos.
-    addToCartTriggers.forEach(trigger => {
-        trigger.addEventListener('click', handleAddToCart);
-    });
+    displayProducts();
+    displayFilterButtons();
 });
-
-

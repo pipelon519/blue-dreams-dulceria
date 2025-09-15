@@ -186,6 +186,114 @@ header.scrolled .nav-capsula {
     align-items: center;
     justify-content: center;
 }
+/* ======================================= */
+/*    NUEVA SECCIÓN DE PRODUCTOS DESTACADOS    */
+/* ======================================= */
+
+.featured-products-section {
+    background-color: var(--bg);
+    padding: 80px 20px;
+}
+
+.featured-products-section .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 60px;
+}
+
+.products-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Alinear tarjetas en la parte inferior */
+    flex-wrap: wrap;
+    gap: 30px;
+    padding-top: 50px; /* Espacio para las imágenes que sobresalen */
+}
+
+.product-showcase-card {
+    position: relative;
+    background-color: white;
+    border-radius: 20px;
+    width: 240px;
+    height: 280px; /* Altura fija para la tarjeta */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Alinea el contenido info abajo */
+}
+
+.product-showcase-card.alt-bg {
+    background-color: #fdeee4;
+}
+
+.product-showcase-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.product-showcase-card .card-image {
+    position: absolute;
+    top: -50px; /* Ajuste para que la imagen sobresalga */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 160px;
+    z-index: 2;
+}
+
+.product-showcase-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.2));
+}
+
+.product-showcase-card .card-info {
+    padding: 20px;
+    width: 100%;
+}
+
+.product-showcase-card .rating {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.product-showcase-card .rating .fa-star {
+    color: #ffc107;
+    margin-right: 4px;
+}
+
+.product-showcase-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.product-showcase-card .price-tag {
+    background-color: #4a4e69;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto; /* Centrar el círculo */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.product-showcase-card .price-tag:hover {
+    background-color: var(--primary);
+}
 
 /* =========================
    CARRITO DE COMPRAS (SIDEBAR)
@@ -1350,3 +1458,65 @@ footer {
   .footer-card {
       padding: 20px;
   }}
+/* ======================================= */
+/*    REGLAS RESPONSIVE PARA "ESENCIA CAFETERA"    */
+/* ======================================= */
+
+/* Para tablets (hasta 1080px) */
+@media (max-width: 1080px) {
+    .esencia2 .contenedor-esencia {
+        grid-template-columns: 1fr; /* Cambia a una sola columna para apilar los elementos */
+        gap: 60px; /* Aumentamos el espacio entre elementos apilados */
+        justify-items: center;
+    }
+
+    .esencia2 .item {
+        max-width: 480px; /* Un ancho máximo para que el texto no sea demasiado largo */
+        text-align: center;
+    }
+    
+    .esencia2 .item::before {
+        /* Hacemos los números más pequeños y sutiles */
+        font-size: 7rem; 
+        top: -25px;
+        left: -15px;
+        opacity: 0.3;
+    }
+
+    .esencia2 .centro {
+        /* La imagen central ahora se ordena de forma natural con los demás items */
+        grid-row: auto; 
+        margin-top: 20px;
+    }
+
+    .esencia2 .centro img {
+        width: 100%;
+        max-width: 380px;
+    }
+}
+
+/* Para móviles (hasta 768px) */
+@media (max-width: 768px) {
+    .esencia2 {
+        padding: 60px 20px; /* Menos espacio en los lados */
+    }
+
+    .esencia2 h2 {
+        font-size: 2rem; /* Título más pequeño */
+        margin-bottom: 40px;
+    }
+
+    .esencia2 .item::before {
+        /* En móviles, los números grandes estorban y es mejor ocultarlos */
+        display: none; 
+    }
+
+    .esencia2 .item {
+        padding: 20px;
+        background: transparent; /* Quitamos el fondo para un look más limpio */
+    }
+    
+    .esencia2 .centro img {
+         max-width: 320px; /* La imagen se hace un poco más pequeña */
+    }
+}

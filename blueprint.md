@@ -1,30 +1,30 @@
-# Blueprint
+
+# Blueprint: New Product Page Design
 
 ## Overview
+This document outlines the plan to create a new product page with a modern design, inspired by the user's provided images. The page will include a functional shopping cart overlay.
 
-This project is a modern, responsive coffee shop website. It features a clean and visually appealing design, with a focus on user experience and interactivity.
+## Current Plan
+1.  **Add Category Filter Buttons:**
+    *   Create a container for the filter buttons in `products.html` above the product grid.
+    *   Dynamically generate the filter buttons from the product categories in `productos.js`.
+    *   Implement the filtering logic in `productos.js` to show/hide products based on the selected category.
+    *   Style the filter buttons and their active state in `productos.css`.
 
-## Project Structure
+2.  **Fix Cart Functionality:**
+    *   Modify `cart.js` to automatically open the cart overlay when a product is added.
+    *   Ensure items are correctly rendered in the cart.
 
-- `index.html`: The main landing page.
-- `products.html`: The page that displays the products.
-- `style.css`: The main stylesheet for the application.
-- `productos.css`: The stylesheet specific to the products page.
-- `header.css`: A new stylesheet created to style the redesigned header.
-- `main.js`: The main JavaScript file for the application.
-- `assets/`: A folder containing all the images and other assets used in the project.
+3.  **Redesign Hero Section:**
+    *   Update `products.html` with a new two-column layout for the hero section, based on the Starbucks image.
+    *   The left column will contain the title, description, price, and a new "Buy Now" button.
+    *   The right column will feature a product image with a circular background and a list of features.
 
-## Current Change: Header Redesign
+4.  **Update CSS (`productos.css`):**
+    *   Completely redesign the hero section styles to match the new layout.
+    *   Style the new "Buy Now" button and the feature list.
+    *   Ensure all new styles are responsive.
 
-### Plan
+5.  **Verify Overall Functionality:**
+    *   Test the redesigned page to ensure the hero section looks correct and the cart is fully functional.
 
-1.  **Analyze existing styles:** Review `productos.css` and `style.css` to understand the current styles affecting the header.
-2.  **Update HTML structure:** Modify the `<header>` in `products.html` to match the layout shown in the provided image.
-3.  **Apply new styles:** Add new CSS rules to `header.css` to style the redesigned header, ensuring it is responsive and visually aligned with the provided image.
-4.  **Create `blueprint.md`:** Create a `blueprint.md` file to document the changes.
-
-### Steps Taken
-
-- The HTML structure of the header in `products.html` has been updated to reflect the new design.
-- A new stylesheet `header.css` has been created with the necessary styles for the redesigned header.
-- The `blueprint.md` file has been created to document the changes.

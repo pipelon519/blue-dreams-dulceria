@@ -1,482 +1,192 @@
 /* Estilos generales para el body */
 :root {
-  --primary:#1d4ed8;
-  --secondary:#60a5fa;
-  --bg:#001f68;
-  --glass:rgba(255,255,255,0.05);
-  --text:#e2e8f0;
-     --width-circle: 150vw;
-    --radius: calc(100vw / 6);
+  --primary: #8a2be2; /* Un morado similar al de la imagen */
+  --secondary: #c6a3ff;
+  --background-image: url('assets/img16.jpeg'); /* Asegúrate que esta ruta es correcta */
+  --glass-bg: rgba(25, 10, 40, 0.5); /* Fondo oscuro semitransparente */
+  --text-primary: #ffffff;
+  --text-secondary: #dcdcdc;
+  --border-color: rgba(255, 255, 255, 0.2);
 }
+
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: radial-gradient(  var(--secondary), var(--primary), var(--bg));
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-}
-
-header h1 {
-  color:var(--secondary);
-  font-weight:700;
-}
-nav a {
-  margin:0 10px;
-  text-decoration:none;
-  padding: 5px;
-  color:var(--text);transition:.3s;
-  border-radius: 50px;}
-nav a:hover {
-    color:var(--secondary);
-    background: var(--text);
-    border-radius: 50px;
-}
-.btn {
-  padding:8px 16px;
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
-  border:none;
-  border-radius:30px;
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-  transition:transform .3s;
-}
-.btn:hover {transform:scale(1.05);}
-
-/* Header general */
-header {
-  position: fixed;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-image: var(--background-image);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
-  z-index: 1000;
+  color: var(--text-primary);
 }
 
-/* Logo separado */
-.logo-out img {
-  height: 80px;
-  transition: transform .6s ease, margin .6s ease;
-}
-
-/* Cápsula inicial del nav */
-
-
-/* Botón de entrar */
-.nav-capsula .btn {
-    border: 1px solid #eee5;
-    background: whitesmoke;
-    color: rgb(100, 100, 255);
-    font-family: Poppins;
-    font-weight: bolder;
-    border-radius: 20px;
-    padding: 10px 10px;
-    cursor: pointer;
-  transition:all .3s ease;
-}
-.nav-capsula .btn:hover {
-  background: #6b6b6b;
-}
-
-/* Estado al hacer scroll */
-
-
-header.scrolled .logo-out img {
-  transform: translateX(-40px);
-  height: 150px;
-  width: 180px;
-  backdrop-filter: blur(12px);
-  background: rgba(245, 222, 179, 0.664);
-  border-radius: 25%;
-  align-items: center;
-  padding: 15px;
-}
-
-
-/* Header wrapper (centrado en la pantalla) */
-header{
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-}
-
-/* Elemento que se anima: la cápsula (pon aquí tu background/glass) */
-.nav-capsula {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  border-radius: 50px;
-  padding: 8px 20px;               /* estado inicial: compacto */
-  width: auto;                     /* arranca ajustada al contenido */
-  min-width:0;                /* evita que se haga ridículamente pequeña */
-  transition: 
-    width 820ms cubic-bezier(.22,.9,.36,1),
-    padding 820ms cubic-bezier(.22,.9,.36,1),
-    border-radius 820ms ease,
-    box-shadow 820ms ease,
-    background 420ms ease;
-  will-change: width, padding;
-  height: 50px;
-}
-
-/* Contenedor de links y acciones (manténlos agrupados) */
-.nav-links { display:flex; gap:18px; align-items:center; }
-.nav-actions { display:flex; align-items:center; gap:12px; }
-
-/* Estado cuando hay scroll: la cápsula se estira (desde el centro) */
-header.scrolled .nav-capsula {
-  width: min(70%, calc(100vw - 64px)); /* se abre hacia los lados */
-  padding: 12px 44px;                    /* más “espacio interior” */
-  box-shadow: 0 10px 30px rgba(2,18,44,0.45);
-}
-
-/* Animación inicial */
-@keyframes navIn {
-  from {
-    opacity: 0;
-    transform: scaleX(0.6);
-  }
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-}
-
-
-@keyframes headerIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-  }
-}
-
-header.scrolled {
-  width: clamp(360px, 78vw, 1100px); /* se estira desde el centro */
-  justify-content: space-between;    /* reparte links y botón */
-  border-radius: 20px;
-}
-
-header.scrolled .logo-out img {
-  transform: scale(0.5);
-}
-
-
-header.scrolled .nav-capsula {
-  justify-content: space-between; /* separa links y botón */
-  width: clamp(360px, 78vw, 1100px); /* se estira */
-}
-/* Evitar overflow hidden en container para que se vea la foto */
 .container {
-  position: relative;
-  width: 350px;
-  margin: 50px auto;
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-}
-
-.background-image {
-  position: fixed;
-  top: 0; left: 0; right:0; bottom:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  filter: blur(5px);
 }
 
-.form-wrapper {
-  position: relative;
-  height: 400px;
-}
-
-/* Estilo general formulario */
-.form {
-  background: rgba(255, 255, 255, 0.85);
+.form-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  padding: 30px 20px 20px;
-  transition: all 0.5s ease;
-  position: absolute;
+  border: 1px solid var(--border-color);
+  width: 420px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.logo-container {
+  margin-bottom: 20px;
+}
+
+.logo {
+  /* Estilos para el SVG si son necesarios */
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.input-group input {
   width: 100%;
-  box-sizing: border-box;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  top: 0;
-  margin-top: 30px;
-  z-index: 1;
-  opacity: 0;
-  transform: scale(0.7);
-  pointer-events: none;
-}
-
-/* Formulario visible activo */
-.form.active {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: all;
-  z-index: 10;
-}
-
-/* Formulario chiquito cuando está detrás */
-.form.shrunk {
-  opacity: 0.5;
-  transform: scale(0.6);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Icono redondo arriba */
-.icon-circle {
-  background: #0e1e45; /* azul oscuro */
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  margin: 0 auto 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-circle .icon-user {
-  font-size: 30px;
-  color: white;
-}
-
-/* Inputs */
-input {
-  width: 100%;
-  margin-bottom: 15px;
   padding: 12px 15px;
-  border-radius: 5px;
-  border: none;
-  background: rgba(14, 30, 69, 0.3);
-  color: #fff;
-  font-size: 14px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 1rem;
   box-sizing: border-box;
 }
 
-input::placeholder {
-  color: #ccc;
+.input-group input::placeholder {
+  color: rgba(255,255,255,0.5);
 }
 
-/* Opciones */
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 .options {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 25px;
+  font-size: 0.9rem;
 }
 
-.options label {
+.remember-me {
   display: flex;
   align-items: center;
-  color: #0e1e45;
+  gap: 8px;
+  color: var(--text-secondary);
 }
 
-.options input[type="checkbox"] {
-  margin-right: 5px;
+.remember-me input[type="checkbox"] {
+    accent-color: var(--primary);
 }
 
-/* Enlaces en texto */
-p {
-  font-size: 13px;
-  color: #333;
-  margin-top: 15px;
-}
-
-a {
-  color: #0e1e45;
+.forgot-password {
+  color: var(--text-secondary);
   text-decoration: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: color 0.2s;
 }
 
-a:hover {
-  color: #3a4d9a;
+.forgot-password:hover {
+  text-decoration: underline;
 }
 
-/* Botones */
-button {
+.login-btn {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  background: #0e1e45;
-  color: white;
+  padding: 15px;
+  background: var(--text-primary);
+  color: #1a1a1a;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  letter-spacing: 2px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
-button:hover {
-  background: #3a4d9a;
+.login-btn:hover {
+  background: #e0e0e0;
 }
 
-
-
-
-.menu-toggle {
-  display: none; /* Oculto por defecto en desktop */
-  font-size: 28px;
-  cursor: pointer;
-  user-select: none;
-  color: var(--secondary); /* o un color visible */
-  padding: 10px;
-  z-index: 2000; /* para que esté encima */
-  position: fixed; /* para que quede fijo en pantalla */
-  top: 20px; /* ajusta según tu header */
-  right: 20px; /* ajusta según tu header */
-  background: rgba(0,0,0,0.3); /* opcional, para que se vea mejor */
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
-}
-.menu-toggle:hover {
-  background: rgba(0,0,0,0.5);
+.divider {
+  margin: 25px 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
 }
 
-/* Responsive móvil */
-@media (max-width: 768px) {
-  /* Mostrar icono hamburguesa */
-  .menu-toggle {
-    display: block; /* Mostrar en móvil */
-    font-size: 24px; /* Ajusta el tamaño si es necesario */
-  }
-
-  /* Ocultar nav-capsula por defecto y prepararla para pantalla completa */
-  .nav-capsula {
-    position: fixed; /* Fijo en la ventana */
-    top: 0;
-    left: 0;
-    width: 100%; /* Ocupa todo el ancho */
-    height: 100vh; /* Ocupa todo el alto */
-    background: var(--glass); /* Usa tu variable de fondo de cristal */
-    backdrop-filter: blur(12px);
-    border-radius: 0; /* Sin bordes redondeados en pantalla completa */
-    padding: 40px 20px 20px 20px; /* Padding interno */
-    flex-direction: column; /* Elementos en columna */
-    gap: 30px; /* Espacio entre elementos */
-    justify-content: center; /* Centrar verticalmente */
-    align-items: center; 
-    display: none; 
-    z-index: 1500;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-    opacity: 0;
-    visibility: hidden;
-    margin-right: 100%;
-    border-radius: 20px;
-    
-  }
-
-  /* Cuando el menú está activo (clase .active), mostrarlo */
-  .nav-capsula.active {
-    display: flex; /* Mostrar como flexbox */
-    opacity: 1;
-    visibility: visible;
-    margin-left: 0%;
-    left: 0;
-    right: 0;
-    margin-right: 100%;
-    
-  }
-
-  /* Navegación en columna dentro del menú de pantalla completa */
-  .nav-links {
-    flex-direction: column;
-    gap: 20px;
-    color: #ffffff;
-  }
-
-  /* Links más grandes para móvil */
-  .nav-links a {
-    font-size: 1.5rem;
-    padding: 10px 0; /* Ajusta el padding de los enlaces */
-    color: #ffffff;
-    background: var(--glass);
-    background-color: rgba(71, 71, 71, 0.445);
-  }
-
-  /* Botón Entrar más grande y centrado */
-  .nav-capsula .btn {
-    font-size: 1.2rem;
-    padding: 12px 24px;
-    border-radius: 40px;
-    /* Asegúrate de que el enlace dentro del botón también sea visible */
-    display: block; /* Para que el <a> dentro del botón ocupe todo el espacio */
-    width: fit-content; /* Ajusta el ancho del botón al contenido */
-    margin-top: 20px; /* Espacio superior */
-  }
-
-  /* Ocultar el botón de "Entrar" en el header principal cuando el menú está abierto */
-  /* Esto es para evitar duplicidad si el botón también está dentro del nav-capsula */
-  header .btn {
-    display: none;
-  }
-  header.scrolled .logo-out img {
-  transform: 0;
-  backdrop-filter: blur(12px);
-  background: rgba(245, 222, 179, 0.664);
-  border-radius: 25%;
-  align-items: center;
+.google-login-btn {
+  width: 100%;
   padding: 15px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s ease;
 }
-  .nav-capsula {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: var(--glass);
-    backdrop-filter: blur(12px);
-    padding: 40px 20px 20px 20px;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    z-index: 1500;
-  }
 
-  .nav-capsula.active {
-    display: flex;
-  }
+.google-login-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
 
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
+.google-login-btn img {
+  width: 20px;
+  height: 20px;
+}
 
-  .nav-links a {
-    width: 100%;
-    text-align: center;
-    padding: 12px 0;
-    font-size: 1.5rem;
-    color: var(--secondary);
-  }
+.signup-link {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.signup-link a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
 }

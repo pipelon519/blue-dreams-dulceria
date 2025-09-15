@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - Blue Dreams</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about.css">
+</head>
+<body>
+    <header>
+         <div class="logo-out">
+            <a href="index.html">
+                <img src="assets/logo.png" alt="Blue Dreams logo">
+            </a>
+        </div>
+        <div class="nav-capsula">
+            <nav class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="index.html#esencia">Esencia</a>
+                <a href="products.html">Productos</a>
+                <a href="about.html" class="active">Sobre</a>
+                <a href="contact.html">Contacto</a>
+            </nav>
+            <div class="header-actions">
+                <button class="cart-btn">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="user-btn">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+            </div>
+        </div>
+        <div class="menu-toggle">☰</div>
+    </header>
+
+    <main class="about-page-content">
+        <section class="about-hero">
+            <div class="about-hero-text">
+                <h1>La Historia de un Sueño Azul</h1>
+                <p>Blue Dreams no es solo una pastelería, es el sueño de un joven de 16 años hecho realidad. Es la pasión por crear momentos de felicidad y dulzura.</p>
+            </div>
+        </section>
+
+        <section class="founder-story">
+            <div class="story-image">
+                <img src="assets/samuel.jpg" alt="Samuel, fundador de Blue Dreams">
+            </div>
+            <div class="story-text">
+                <h2>De la Inspiración a la Creación</h2>
+                <p>Con solo 16 años, <strong>Samuel</strong>, nuestro fundador, comenzó a soñar con un lugar donde cada detalle contara una historia. Un lugar donde la pastelería no fuera solo un postre, sino una experiencia completa. Inspirado por los colores del cielo al atardecer y la tranquilidad del océano, nació "Blue Dreams".</p>
+                <p>Lo que empezó como un pequeño proyecto personal, horneando para amigos y familiares, rápidamente se convirtió en una vocación. La dedicación por encontrar los ingredientes perfectos y la obsesión por el diseño de cada producto, dieron forma a la filosofía que hoy nos define: crear delicias únicas que alimentan tanto el paladar como el alma.</p>
+                <p>Hoy, ese sueño azul es un espacio donde la creatividad y el sabor no tienen límites. Te invitamos a ser parte de nuestra historia.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-container">
+        <div class="footer-banner" aria-hidden="true">
+            <div class="footer-banner-text">
+                <span>BLUE DREAMS</span><span style="margin: 0 20px;">•</span>
+                <span>BLUE DREAMS</span><span style="margin: 0 20px;">•</span>
+                <span>BLUE DREAMS</span><span style="margin: 0 20px;">•</span>
+                <span>BLUE DREAMS</span><span style="margin: 0 20px;">•</span>
+                <span>BLUE DREAMS</span><span style="margin: 0 20px;">•</span>
+                <span>BLUE DREAMS</span><span style="margin: 0 20px;">•</span>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-top-row">
+                <div class="footer-card footer-contact-card">
+                    <h3>CONTACTO</h3>
+                    <form action="#">
+                        <input type="text" placeholder="Nombre" aria-label="Nombre">
+                        <input type="email" placeholder="Correo Electrónico" aria-label="Correo Electrónico">
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+                <div class="footer-card footer-thankyou-card">
+                    <h3>¡GRACIAS!</h3>
+                    <p>Gracias por visitar nuestro sitio y ser parte de este sueño azul.</p>
+                    <a href="#" class="arrow-button" aria-label="Explorar más">→</a>
+                </div>
+            </div>
+            <div class="footer-bottom-row">
+                <div class="footer-logo-area">
+                    <img src="assets/Flogo.png" alt="Logo de Blue Dreams">
+                    <p>Nos dedicamos a crear experiencias únicas con un diseño elegante y funcional. Hecho con pasión.</p>
+                </div>
+                <div class="footer-subscribe-area">
+                    <h3>SUSCRÍBETE</h3>
+                    <form action="#">
+                        <input type="email" placeholder="Tu correo electrónico" aria-label="Correo electrónico para suscribirse">
+                        <button type="submit" aria-label="Suscribirse">→</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <aside id="cart-sidebar">
+        <div class="cart-header">
+            <div class="cart-header-top">
+                <h3>Cart</h3>
+                <span class="order-number">Order #3243</span>
+                 <button class="close-cart-btn">&times;</button>
+            </div>
+            <div class="order-options">
+                <button class="option-btn active">Delivery</button>
+                <button class="option-btn">Dine in</button>
+                <button class="option-btn">Take away</button>
+            </div>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+             <div class="summary-line">
+                <span>Items</span>
+                <span class="price">COP $0</span>
+            </div>
+            <div class="summary-line discounts">
+                <span>Discounts</span>
+                <span class="price">-COP $0</span>
+            </div>
+            <div class="total-cost">
+                <span>Total</span>
+                <span class="price">COP $0</span>
+            </div>
+            <button class="checkout-btn">Place an order</button>
+        </div>
+    </aside>
+    <div id="cart-overlay"></div>
+
+    <script src="main.js"></script>
+    <script src="productos.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
